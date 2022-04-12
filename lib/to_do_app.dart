@@ -58,7 +58,7 @@ class _ToDoAppState extends State<ToDoApp> {
           if (taskBox.length > 0) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                final task = taskBox.get(index);
+                Todo? task = taskBox.getAt(index);
                 return ListTile(
                   title: Text(
                     task!.title.toString(),
@@ -69,7 +69,10 @@ class _ToDoAppState extends State<ToDoApp> {
                   ),
                   leading: Checkbox(
                     value: task.completed,
-                    onChanged: (value) => checkTickBox(index, task),
+                    onChanged: (value) => checkTickBox(
+                      index,
+                      Todo(task.title, value),
+                    ),
                   ),
                 );
               },

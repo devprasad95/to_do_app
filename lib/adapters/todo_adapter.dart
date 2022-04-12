@@ -8,7 +8,7 @@ class Todo {
   final String? title;
 
   @HiveField(1)
-  final bool? completed;
+  late final bool? completed;
 
   Todo(this.title, this.completed);
 }
