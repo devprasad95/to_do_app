@@ -30,6 +30,12 @@ class _ToDoAppState extends State<ToDoApp> {
       _textFieldEditingController.clear();
       return;
     }
+    if (_textFieldEditingController.text.isEmpty) {
+      const snackBar = SnackBar(
+        content: Text('Nothing added'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   void _deleteTask(int index) {
@@ -90,18 +96,12 @@ class _ToDoAppState extends State<ToDoApp> {
           builder: (context) {
             return AlertDialog(
               title: const Text('Add a task'),
-              content: TextFormField(
+              content: TextField(
                 controller: _textFieldEditingController,
                 decoration: const InputDecoration(
                   hintText: 'Add something',
                   border: OutlineInputBorder(),
                 ),
-                validator: (v) {
-                  if (v!.isEmpty) {
-                    return 'Nothing added';
-                  }
-                  return null;
-                },
               ),
               actions: [
                 TextButton(
@@ -111,7 +111,9 @@ class _ToDoAppState extends State<ToDoApp> {
                   child: const Text('Cancel'),
                 ),
                 ElevatedButton(
-                  onPressed: () => _addingTask(),
+                  onPressed: () {
+                    return _addingTask();
+                  },
                   child: const Text('Save'),
                 ),
               ],
